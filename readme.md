@@ -1,10 +1,11 @@
 # Banana World
 
-BananaWorld is a suite of Python classes built on top of [Mesa](https://mesa.readthedocs.io/en/master/index.html) heavily inspired by [DaisyWorld](https://en.wikipedia.org/wiki/Daisyworld).
+BananaWorld is a suite of Python classes built on top of [Mesa](https://mesa.readthedocs.io/en/master/index.html) and heavily inspired by [DaisyWorld](https://en.wikipedia.org/wiki/Daisyworld).
 
-It was created to help the multiagent simulation community be able to better simulate economic transaction of autonmous agents. The core function of the current codebase is to simulate economic transactions of bananas 🍌
+It was created to help the multiagent simulation community better simulate economic transaction of autonmous agents. The core function of the current codebase is to simulate economic transactions of bananas 🍌
 
-Within the code are the agents *Buyers* and *Growers* which their respective lifecycles. Growers grow *Products* (in this case Bananas) and Buyers consume them. Using the existing functions of Mesa, we simulate purchasing cycles of agents as well as lifecycle of products. 
+Within the code are the agents *Buyers* and *Growers* which their respective lifecycles. 
+Growers grow *Products* (in this case Bananas) and Buyers consume them. Using the existing functions of Mesa, we simulate purchasing cycles of agents as well as lifecycle of products. 
 
 With the example Models provided you can explore, graph, or export as csv, data from worlds with various seed data. This might be as simple as the number of Buyers, or Growers or it might be as complex as the shelf-life of a banana or calcultion of consumer satisfaction.
 
