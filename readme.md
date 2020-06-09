@@ -17,19 +17,19 @@ ___
 
 ### Changelog:
 
-####v5
+v5
 Reinforcement learning with DQN
 ___
 * world shrunk to 1 x 10 where buyer learns to move closer to the seller
 * see ipynb/colab for more information
 
-####v4
+v4
 Strategies where buyers can deploy greedy strategies on cost, co2, health values of bananas/sellers
 ___
 * CO2 cost on growers to grow
 * CO2 cost on shipping depending on growers 
 
-####v3
+v3
 Buyers and Sellers are on locations where the buyers have to pay shipping costs _x_ each cell needed to ship product
 ___
 * Grid is now applied randomly
