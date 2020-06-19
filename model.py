@@ -198,15 +198,23 @@ class BananaWorldModel(SimulationACommerce):
 
 class BananaWorldModelOnGrid(SimulationACommerce):
     def __init__(self, n=1, gridsize=(3, 3), strats=False, co2=None):
-        super().__init__(n, gridsize=gridsize, co2=co2)
+        original_data = {"co2_current": co2}
+        super().__init__(n, gridsize=gridsize, original_data=original_data)
         self.strategies = GRID_STRATEGIES if strats else ["greedy_economic_grid"]
         self.n = n
+        self.co2_enabled = False
+        self.randomized = random
+        if co2:
+            self.co2_enabled = True
+            self.co2_max = 2 * co2
+            self.co2_current = co2
+            self.waste_cost = 0.25
 
     def generate_agents(self):
         for i in range(self.n):
             g = None
             pos = (random.randint(0, self.grid.width - 1), random.randint(0, self.grid.height - 1))
-            if not random:
+            if not self.randomized:
                 g = GrowerAgent(unique_id=self.next_id(), model=self, pos=(3, 3), wealth=1.0, product_price=1.0,
                                 max_inventory=5)
             else:
@@ -225,7 +233,7 @@ class BananaWorldModelOnGrid(SimulationACommerce):
         for i in range(self.n):
             b = None
             pos = (random.randint(0, self.grid.width - 1), random.randint(0, self.grid.height - 1))
-            if not random:
+            if not self.randomized:
                 b = BuyerAgent(unique_id=self.next_id(), model=self, pos=(0, 0), wealth=1.0, max_inventory=2,
                                salary=0.5)
             else:
@@ -244,6 +252,18 @@ class BananaWorldModelOnGrid(SimulationACommerce):
 
     def step(self):
         super().step()
+        if self.co2_enabled is True:
+            self.update_co2()
+
+    def update_co2(self):
+        trashed_bananas = len(list(filter(lambda a: (a.is_in_trash == True), self.product_schedule.agents)))
+        self.increase_co2(trashed_bananas * self.waste_cost)
+
+    def increase_co2(self, i):
+        self.co2_current += i
+
+    def decrease_co2(self, d):
+        self.co2_current -= d
 
 
 class DeepBananaWorld(BananaWorldModelOnGrid):  # see deep_main.py
